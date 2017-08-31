@@ -155,7 +155,9 @@ def _get_ancestors(appliance_type_name, appliance_types_from_disk):
 
 def recursively_update_dict(dict_to_update, source_dict):
     """ Recursively extends lists in dict_to_update with lists in source_dict,
-    and updates dicts.
+    and updates dicts. To update recursively means, that if you access the dict_to_update 
+    it will yield for all keys contained in the source_dict exactly the same values as 
+    when requesting the source_dict.
 
     This function is required because Python's `dict.update()` function
     does not descend into dicts within dicts.
