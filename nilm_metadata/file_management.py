@@ -30,14 +30,21 @@ def _get_appliance_types_directory():
 
 
 def _find_all_files_with_suffix(suffix, directory):
-    """Find all files with suffix, recursively."""
+    """
+    Find all files with suffix, recursively.
+    """
+
     accumulator = []
 
-    for root, dirs, fnames in os.walk(directory):
-        new_files = [os.path.join(root, fname) for fname in fnames
-                     if fname.endswith(suffix)]
-        accumulator.extend(new_files)
-
+    try:
+        for root, dirs, fnames in os.walk(directory):
+            new_files = [os.path.join(root, fname) for fname in fnames
+                         if fname.endswith(suffix)]
+            accumulator.extend(new_files)
+    except:
+        # Whyever, the walk creates an StopIteration exception instead of stopping 
+        # early enough in the for loop.
+        pass
     return accumulator
 
 
